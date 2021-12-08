@@ -9,7 +9,7 @@
     restaurant.foods.build(
       name: "フード名_#{m + 1}",
       price: 500,
-      description: "フード_#{m  +1}の説明文です。"
+      description: "フード_#{m + 1}の説明文です。",
     )
   end
 
