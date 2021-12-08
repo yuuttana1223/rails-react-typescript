@@ -1,24 +1,13 @@
-# README
+## 実装するもの
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- 最低限の動きに必要なデータの Migration と Model の定義
+- データを取得するための API Controller の実装
+- API のなかで例外パターンに一致する場合にはエラーを返却すること
 
-Things you may want to cover:
+## 実装しないもの
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- データを投入する Admin 画面(システム管理者用画面)
+- データごとのユニークな画像
+- テスト
+- ユーザー登録/ログインの処理
+- 本番デプロイ
