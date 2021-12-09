@@ -12,5 +12,6 @@
   // ファイル保存時に最新の行を末尾に挿入する
   "files.insertFinalNewline": true,
   // アイコンテーマの指定
-  "workbench.iconTheme": "vscode-icons"
+  "workbench.iconTheme": "vscode-icons",
+  "javascript.preferences.importModuleSpecifier": "non-relative"
 }
