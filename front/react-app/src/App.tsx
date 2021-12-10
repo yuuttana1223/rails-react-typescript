@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { VFC } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Orders } from "containers/Orders";
+import { Restaurants } from "containers/Restaurants";
+import { Foods } from "containers/Foods";
+import { NotFound } from "containers/NotFound";
 
-function App() {
+export const App: VFC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="restaurants">
+            <Route index element={<Restaurants />} />
+            <Route path=":restaurantId/foods" element={<Foods />} />
+          </Route>
+          <Route path="orders" element={<Orders />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
-}
+};
 
 export default App;
