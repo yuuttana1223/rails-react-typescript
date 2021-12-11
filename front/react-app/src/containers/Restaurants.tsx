@@ -5,9 +5,9 @@ import { REQUEST_STATE } from "constants/request";
 import { restaurantsActionTypes } from "constants/restaurants";
 import { fetchRestaurants } from "apis/restaurants";
 
-import MainLogo from "images/logo.png";
-import MainCoverImage from "images/main-cover-image.png";
-import RestaurantImage from "images/restaurant-image.jpg";
+import MainLogo from "assets/images/logo.png";
+import MainCoverImage from "assets/images/main-cover-image.png";
+import RestaurantImage from "assets/images/restaurant-image.jpg";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -70,7 +70,7 @@ export const Restaurants: VFC = () => {
       dispatch({
         type: restaurantsActionTypes.FETCH_SUCCESS,
         payload: {
-          restaurants: data ?? state.restaurants,
+          restaurants: data,
         },
       });
     });
@@ -94,7 +94,7 @@ export const Restaurants: VFC = () => {
             <Skeleton variant="rectangular" width={450} height={300} />
           </>
         ) : (
-          state.restaurants.map((restaurant) => (
+          state.restaurants?.map((restaurant) => (
             <Link
               to={`/restaurants/${restaurant.id}/foods`}
               key={restaurant.id}

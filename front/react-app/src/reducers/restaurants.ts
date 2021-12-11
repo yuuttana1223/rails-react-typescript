@@ -3,14 +3,12 @@ import { restaurantsActionTypes } from "constants/restaurants";
 import { Restaurant } from "types/restaurant";
 
 type State = {
-  restaurants: Restaurant[];
+  restaurants?: Restaurant[];
 };
 
 type Action = {
   type: string;
-  payload?: {
-    restaurants: Restaurant[];
-  };
+  payload?: State;
 };
 
 export const restaurantsReducer = (state: State, action: Action) => {
@@ -23,11 +21,9 @@ export const restaurantsReducer = (state: State, action: Action) => {
     case restaurantsActionTypes.FETCH_SUCCESS:
       return {
         fetchState: REQUEST_STATE.OK,
-        restaurants: action.payload
-          ? action.payload.restaurants
-          : state.restaurants,
+        restaurants: action.payload?.restaurants,
       };
     default:
-      throw new Error("アクションの指定が存在しない");
+      throw new Error("指定されたタイプが存在しない");
   }
 };
