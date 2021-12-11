@@ -1,8 +1,9 @@
-const DEFAULT_API_LOCALHOST = "http://localhost:3000/api/v1";
+const API_URL = "http://localhost:3000/api/v1";
 
-export const restaurantsIndex = `${DEFAULT_API_LOCALHOST}/restaurants`;
-export const foodsIndex = (restaurantId: string) =>
-  `${DEFAULT_API_LOCALHOST}/restaurants/${restaurantId}/foods`;
-export const lineFoods = `${DEFAULT_API_LOCALHOST}/line_foods`;
-export const lineFoodsReplace = `${DEFAULT_API_LOCALHOST}/line_foods/replace`;
-export const orders = `${DEFAULT_API_LOCALHOST}/orders`;
+export const RESTAURANTS_URL = `${API_URL}/restaurants`;
+export const getFoodsUrl = (restaurantId?: string) =>
+  `${API_URL}/restaurants/${restaurantId}/foods`;
+
+export const LINE_FOODS_URL = `${API_URL}/line_foods`;
+export const LINE_FOODS_REPLACE_URL = `${API_URL}/line_foods/replace`;
+export const ORDERS_URL = `${API_URL}/orders`;
