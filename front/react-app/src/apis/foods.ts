@@ -5,8 +5,6 @@ import { getFoodsUrl } from "urls";
 export const fetchFoods = (restaurantId?: string) => {
   return axios
     .get<Food[]>(getFoodsUrl(restaurantId))
-    .then((res) => {
-      return res.data;
-    })
-    .catch((e) => console.error(e));
+    .then((res) => res.data)
+    .catch((e) => e);
 };
