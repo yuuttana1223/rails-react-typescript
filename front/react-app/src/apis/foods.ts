@@ -6,5 +6,7 @@ export const fetchFoods = (restaurantId?: string) => {
   return axios
     .get<Food[]>(getFoodsUrl(restaurantId))
     .then((res) => res.data)
-    .catch((e) => e);
+    .catch((e: Error) => {
+      throw e;
+    });
 };
