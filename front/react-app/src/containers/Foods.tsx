@@ -42,14 +42,14 @@ const SItemWrapper = styled.div`
   margin: 16px;
 `;
 
-const initialState = {
+const foodsInitialState = {
   fetchState: REQUEST_STATE.INITIAL,
   foods: [],
 };
 
 export const Foods: VFC = () => {
   const { restaurantId } = useParams();
-  const [state, dispatch] = useReducer(foodsReducer, initialState);
+  const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
 
   useEffect(() => {
     dispatch({
@@ -80,13 +80,13 @@ export const Foods: VFC = () => {
         </SBagIconWrapper>
       </SHeaderWrapper>
       <SFoodsList>
-        {state.fetchState === REQUEST_STATE.LOADING
+        {foodsState.fetchState === REQUEST_STATE.LOADING
           ? [...Array(12)].map((_, index) => (
               <SItemWrapper key={index}>
                 <Skeleton variant="rectangular" width={450} height={180} />
               </SItemWrapper>
             ))
-          : state.foods?.map((food) => (
+          : foodsState.foods?.map((food) => (
               <SItemWrapper key={food.id}>
                 <FoodWrapper
                   food={food}
