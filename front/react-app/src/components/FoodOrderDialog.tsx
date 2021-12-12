@@ -10,6 +10,9 @@ import {
 import { SSubText } from "components/FoodWrapper";
 import { VFC } from "react";
 import { Food } from "types/food";
+import { CountDownButton } from "components/Buttons/CountDownButton";
+import { CountUpButton } from "components/Buttons/CountUpButton";
+import { OrderButton } from "components/Buttons/OrderButton";
 
 const SOrderHeader = styled.img`
   width: 100%;
@@ -21,10 +24,40 @@ const SDescriptionWrapper = styled.div`
   height: 50px;
 `;
 
+const SCountersWrapper = styled.div`
+  margin-right: auto;
+  display: flex;
+  padding: 0 16px;
+`;
+
+const SCountItem = styled.div`
+  margin: 0 8px;
+`;
+
+const SCountNum = styled.div`
+  padding-top: 10px;
+`;
+
+const SOrderTextWrapper = styled.div`
+  display: flex;
+`;
+
+const SOrderButtonTextWrapper = styled.div`
+  width: 300px;
+`;
+
+const SPriceWrapper = styled.div`
+  padding-top: 4px;
+`;
+
 type Props = {
   food?: Food;
   isOpen: boolean;
   handleClose: () => void;
+  countNumber: number;
+  handleCountUp: () => void;
+  handleCountDown: () => void;
+  handleOrder: () => void;
 };
 
 export const FoodOrderDialog: VFC<Props> = (props) => {
@@ -37,7 +70,35 @@ export const FoodOrderDialog: VFC<Props> = (props) => {
           <SSubText>{props.food?.description}</SSubText>
         </DialogContent>
       </SDescriptionWrapper>
-      <DialogActions>数量を操作するアクションを入れる予定</DialogActions>
+      <DialogActions>
+        <SCountersWrapper>
+          <SCountItem>
+            <CountDownButton
+              handleCountDown={props.handleCountDown}
+              isDisabled={props.countNumber <= 1}
+            />
+          </SCountItem>
+          <SCountItem>
+            <SCountNum>{props.countNumber}</SCountNum>
+          </SCountItem>
+          <SCountItem>
+            <CountUpButton
+              handleCountUp={props.handleCountUp}
+              isDisabled={props.countNumber >= 9}
+            />
+          </SCountItem>
+        </SCountersWrapper>
+        <OrderButton onClick={props.handleOrder}>
+          <SOrderTextWrapper>
+            <SOrderButtonTextWrapper>
+              {`${props.countNumber}点を注文に追加`}
+            </SOrderButtonTextWrapper>
+            <SPriceWrapper>{`¥${
+              props.food && props.countNumber * props.food?.price
+            }`}</SPriceWrapper>
+          </SOrderTextWrapper>
+        </OrderButton>
+      </DialogActions>
     </Dialog>
   );
 };
