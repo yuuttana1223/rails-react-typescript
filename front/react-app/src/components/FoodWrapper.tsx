@@ -38,12 +38,12 @@ const SFoodImageNode = styled.img`
 
 type Props = {
   food: Food;
-  handleClick: (food: Food) => void;
+  handleOpen: (food: Food) => void;
   imageUrl: string;
 };
 
 export const FoodWrapper: VFC<Props> = (props) => (
-  <SWrapper onClick={() => props.handleClick(props.food)}>
+  <SWrapper onClick={() => props.handleOpen(props.food)}>
     <SFoodDetail>
       {props.food.name}
       <SDescriptionWrapper>

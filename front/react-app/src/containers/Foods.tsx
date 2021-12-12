@@ -6,12 +6,14 @@ import { LocalMallIcon } from "assets/icons";
 import { foodsActionTypes } from "constants/foods";
 import { REQUEST_STATE } from "constants/request";
 import { COLORS } from "constants/style";
-import { VFC, useEffect, useReducer } from "react";
+import { VFC, useEffect, useReducer, useCallback, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { foodsReducer } from "reducers/foods";
 import styled from "styled-components";
 import { Skeleton } from "@mui/material";
 import { FoodWrapper } from "components/FoodWrapper";
+import { Food } from "types/food";
+import { FoodOrderDialog } from "components/FoodOrderDialog";
 
 const SHeaderWrapper = styled.div`
   display: flex;
@@ -47,9 +49,40 @@ const foodsInitialState = {
   foods: [],
 };
 
+type State = {
+  isOpenOrderDialog: boolean;
+  selectedFood?: Food;
+  selectedFoodCount: number;
+};
+
+const initialState: State = {
+  isOpenOrderDialog: false,
+  selectedFoodCount: 1,
+};
+
 export const Foods: VFC = () => {
   const { restaurantId } = useParams();
   const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
+  const [state, setState] = useState<State>(initialState);
+
+  const handleOpen = useCallback((food: Food) => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        isOpenOrderDialog: true,
+        selectedFood: food,
+      };
+    });
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        isOpenOrderDialog: false,
+      };
+    });
+  }, []);
 
   useEffect(() => {
     dispatch({
@@ -65,7 +98,6 @@ export const Foods: VFC = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(state.fetchState);
 
   return (
     <>
@@ -90,12 +122,19 @@ export const Foods: VFC = () => {
               <SItemWrapper key={food.id}>
                 <FoodWrapper
                   food={food}
-                  handleClick={(food) => console.log(food)}
+                  handleOpen={handleOpen}
                   imageUrl={FoodImage}
                 />
               </SItemWrapper>
             ))}
       </SFoodsList>
+      {state.isOpenOrderDialog && (
+        <FoodOrderDialog
+          food={state.selectedFood}
+          isOpen={state.isOpenOrderDialog}
+          handleClose={handleClose}
+        />
+      )}
     </>
   );
 };
