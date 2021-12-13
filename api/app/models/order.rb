@@ -7,7 +7,7 @@ class Order < ApplicationRecord
     ActiveRecord::Base.transaction do
       line_foods.each do |line_food|
         # selfは.save_withの.の前のインスタンス
-        line_food.update_attributes!(active: false, order: self)
+        line_food.update!(active: false, order: self)
       end
       self.save!
     end
