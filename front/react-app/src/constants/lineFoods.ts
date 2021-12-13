@@ -1,0 +1,6 @@
+export const lineFoodsActionTypes = {
+  FETCHING: "FETCHING",
+  FETCH_SUCCESS: "FETCH_SUCCESS",
+  POSTING: "POSTING",
+  POST_SUCCESS: "POST_SUCCESS",
+};
