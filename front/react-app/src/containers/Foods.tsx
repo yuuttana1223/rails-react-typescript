@@ -48,11 +48,6 @@ const SItemWrapper = styled.div`
   margin: 16px;
 `;
 
-const foodsInitialState = {
-  fetchState: REQUEST_STATE.INITIAL,
-  foods: [],
-};
-
 type State = {
   isOpenOrderDialog: boolean;
   selectedFood?: Food;
@@ -62,18 +57,19 @@ type State = {
   newRestaurantName: string;
 };
 
-const initialState: State = {
-  isOpenOrderDialog: false,
-  selectedFoodCount: 1,
-  isOpenNewOrderDialog: false,
-  existingRestaurantName: "",
-  newRestaurantName: "",
-};
-
 export const Foods: VFC = () => {
   const { restaurantId } = useParams();
-  const [foodsState, dispatch] = useReducer(foodsReducer, foodsInitialState);
-  const [state, setState] = useState<State>(initialState);
+  const [foodsState, dispatch] = useReducer(foodsReducer, {
+    fetchState: REQUEST_STATE.INITIAL,
+    foods: [],
+  });
+  const [state, setState] = useState<State>({
+    isOpenOrderDialog: false,
+    selectedFoodCount: 1,
+    isOpenNewOrderDialog: false,
+    existingRestaurantName: "",
+    newRestaurantName: "",
+  });
   const navigate = useNavigate();
 
   const handleOpen = useCallback((food: Food) => {
