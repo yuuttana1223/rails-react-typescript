@@ -70,6 +70,7 @@ export const Foods: VFC = () => {
     existingRestaurantName: "",
     newRestaurantName: "",
   });
+
   const navigate = useNavigate();
 
   const handleOpen = useCallback((food: Food) => {
