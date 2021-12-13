@@ -3,6 +3,8 @@ import { lineFoodsActionTypes } from "../constants/lineFoods";
 import { REQUEST_STATE } from "../constants/request";
 
 type State = {
+  fetchState?: string;
+  postState?: string;
   lineFoodsSummary?: LineFoodsSummary;
 };
 
@@ -11,7 +13,7 @@ type Action = {
   payload?: State;
 };
 
-export const lineFoodReducer = (state: State, action: Action) => {
+export const lineFoodsReducer = (state: State, action: Action) => {
   switch (action.type) {
     case lineFoodsActionTypes.FETCHING:
       return {

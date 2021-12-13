@@ -26,7 +26,7 @@ export const postLineFoods = (params: Params) => {
     .then((res) => {
       return res.data;
     })
-    .catch((e: Error) => {
+    .catch((e: AxiosError) => {
       throw e;
     });
 };
@@ -40,7 +40,7 @@ export const replaceLineFoods = (params: Params) => {
     .then((res) => {
       return res.data;
     })
-    .catch((e: Error) => {
+    .catch((e: AxiosError) => {
       throw e;
     });
 };
